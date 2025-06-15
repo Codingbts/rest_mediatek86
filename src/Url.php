@@ -42,8 +42,10 @@ class Url {
      */
     private function __construct() {
         // variables d'environnement
-        $this->dotenv = Dotenv::createImmutable(__DIR__);
-        $this->dotenv->load();
+       if (file_exists(__DIR__ . '/.env')) {
+            $dotenv = Dotenv::createImmutable(__DIR__);
+            $dotenv->load();
+        }
         // variables envoyées par l'url
         $this->data = $this->recupAllData();
     }
